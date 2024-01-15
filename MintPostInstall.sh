@@ -1,8 +1,8 @@
 #!/bin/sh
 # My super-duper Mint post-install script
 # Last update 12/12/2023
-# Available at: 
-# https://github.com/akouzm/mint.git/MintPostInstall.sh
+# Available at:  https://raw.githubusercontent.com/akouzm/mint/master/MintPostInstall.sh
+# or possibly:
 # https://www.dropbox.com/s/rntid7d97q71h53/MintPostInstall.sh.txt?dl=0
 # http://bit.ly/2g3fq7B
 

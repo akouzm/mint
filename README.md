@@ -1,3 +1,2 @@
 # mint
-Mint stuff
-blah.
+Linux Mint stuff

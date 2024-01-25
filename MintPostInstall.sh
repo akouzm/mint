@@ -25,14 +25,14 @@ echo
 #echo -n "-//- Decreasing swappiness (to 5).. "
 #sed -i "s/^vm.swappiness=.*/vm.swappiness=5/g" /etc/sysctl.conf && echo OK || echo ERROR
 
-# Auto-accept eula
-echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 echo
 echo "-//- Installing extra packages..."; sleep 1
-apt install vim audacious xfce4-goodies gparted keepassx mc ttf-mscorefonts-installer pv imwheel lsb-release scrot lunzip lzip guake hardinfo && echo OK || echo ERROR
+apt install screenfetch vim audacious xfce4-goodies gparted keepassx mc ttf-mscorefonts-installer pv imwheel lsb-release scrot lunzip lzip guake hardinfo && echo OK || echo ERROR
+
+# Auto-accept eula
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
 
 echo
-
 echo "-//- Removing stuff we don't want...";sleep 1
 apt remove firefox thunderbird && echo OK ||echo ERROR
 
@@ -53,18 +53,11 @@ echo "Installing third-party packages..."
 apt install grub-customizer linssid #google-chrome-stable
 
 echo
-
-echo "-//- Installing screenfetch"
-cd /usr/local/bin && wget -O screenfetch 'https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev' && chmod +x screenfetch && cd -
-
-echo
-
 #echo "-//- Dropbox missing icon tweak...";sleep 1
 #su -c 'dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start' andrew
 #/usr/local/bin/DropBoxIconFix
 
 echo
-
 # Completely disable IPv6 (see http://www.techrepublic.com/article/how-to-fix-the-slow-apt-get-update-issue-on-linux-machines/)
 echo -n "-//- Disabling IPv6... "
 echo "net.ipv6.conf.all.disable_ipv6 = 1
@@ -72,7 +65,6 @@ net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf && service networking restart && echo OK || echo ERROR
 
 echo
-
 # Adjust keyboard delay and repeat rate
 #xset r rate 250 40
 echo;echo "######## Remember to go set keyboard delay to 250ms and repeat to 40 ########"
@@ -88,6 +80,7 @@ echo
 #Shift_L,   Down, Shift_L|Button5
 #
 # The number after Button4 and Button5 dictates the Scroll Line Multiplier, or something. 3 seems ideal." >/root/.imwheelrc && echo "imwheel" >> /etc/rc.local
+
 echo
 #echo "-//- Creating swapfile... ";sleep 0.5
 #dd if=/dev/zero of=/swapfile bs=1048576 count=$SWAPMB && mkswap /swapfile && chown root:root /swapfile && chmod 0600 /swapfile && swapon /swapfile && echo OK || echo ERROR
@@ -96,17 +89,20 @@ echo
 #echo "/swapfile      swap      swap      defaults      0 0" >> /etc/fstab && echo OK || echo ERROR
 
 echo "-//- Clock string for status bar widget: %k:%M %n %a %e/%m"
-echo
+
 #echo "-//- Creating pingrouter.sh"
 #echo "echo [\$(ping -c 1 192.168.20.1 |grep time= |awk '{print \$7}' | cut -f2 -d=)ms]">/usr/local/bin/pingrouter.sh && chmod +x /usr/local/bin/pingrouter.sh
+
+echo
 echo "-//- Grabbing PingMonitor.sh"
-wget -O /usr/local/bin/PingMonitor.sh https://raw.githubusercontent.com/akouzm/mint/master/PingMonitor.sh
+wget -O /usr/local/bin/PingMonitor.sh https://raw.githubusercontent.com/akouzm/mint/master/PingMonitor.sh && chmod 755 /usr/local/bin/PingMonitor.sh
+
 echo
 echo -n "-//- Setting time to use RTC rather than UTC... "
 timedatectl set-local-rtc 1 && echo OK || echo ERROR
-echo
 
 # Compiz
+echo
 echo "To enable compiz:
 
 Alt-F2

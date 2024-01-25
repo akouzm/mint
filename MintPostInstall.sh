@@ -1,6 +1,6 @@
 #!/bin/sh
 # My super-duper Mint post-install script
-# Last update 12/12/2023
+# Last update 25/01/2024
 # Available at:  https://raw.githubusercontent.com/akouzm/mint/master/MintPostInstall.sh
 
 # swapfile size in MB
@@ -97,18 +97,17 @@ echo
 
 echo "-//- Clock string for status bar widget: %k:%M %n %a %e/%m"
 echo
-echo "-//- Creating pingrouter.sh"
-echo "echo [\$(ping -c 1 192.168.20.1 |grep time= |awk '{print \$7}' | cut -f2 -d=)ms]">/usr/local/bin/pingrouter.sh && chmod +x /usr/local/bin/pingrouter.sh
-
+#echo "-//- Creating pingrouter.sh"
+#echo "echo [\$(ping -c 1 192.168.20.1 |grep time= |awk '{print \$7}' | cut -f2 -d=)ms]">/usr/local/bin/pingrouter.sh && chmod +x /usr/local/bin/pingrouter.sh
+echo "-//- Grabbing PingMonitor.sh"
+wget -O /usr/local/bin/PingMonitor.sh https://raw.githubusercontent.com/akouzm/mint/master/PingMonitor.sh
+echo
 echo -n "-//- Setting time to use RTC rather than UTC... "
 timedatectl set-local-rtc 1 && echo OK || echo ERROR
-
 echo
 
 # Compiz
 echo "To enable compiz:
-
-Confirm compatibility:  /usr/lib/nux/unity_support_test -p
 
 Alt-F2
 compiz --replace
